@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简繁转换工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>简繁转换工具</h1>
+        <div class="input-group">
+            <textarea id="inputText" placeholder="请输入要转换的文本"></textarea>
+            <button id="convert">转换</button>
+            <button id="clear">清除</button>
+        </div>
+        <div class="output-group">
+            <textarea id="outputText" placeholder="转换后的文本将显示在这里" readonly></textarea>
+            <button id="copyOutput">复制</button>
+        </div>
+        <div class="conversion-type">
+            <label for="conversionType">转换类型:</label>
+            <select id="conversionType">
+                <option value="zh-tw">简体转繁体</option>
+                <option value="zh-cn">繁体转简体</option>
+            </select>
+        </div>
+        <div class="history-section">
+            <h2>历史记录</h2>
+            <button id="exportHistory">导出历史记录</button>
+            <button id="clearHistory">清除历史记录</button>
+            <div id="historyList"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/zhconv/dist/zhconv.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
