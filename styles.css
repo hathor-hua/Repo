@@ -2,11 +2,45 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
+    background-color: #f9f9f9;
 }
 
-.symbol-container {
-    max-width: 800px;
+.container {
+    max-width: 900px;
     margin: 0 auto;
+}
+
+h1 {
+    color: #333;
+}
+
+#search {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tab.active {
+    background-color: #007bff;
+    color: white;
 }
 
 .symbols {
@@ -31,4 +65,8 @@ body {
 
 .symbol.copied {
     background-color: #d4edda;
+}
+
+.hidden {
+    display: none;
 }
