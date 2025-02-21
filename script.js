@@ -1,36 +1,38 @@
 body {
     font-family: 'Noto Sans TC', Arial, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f4f7fa;
     color: #333;
     margin: 0;
     padding: 40px;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: #fff;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     margin-bottom: 10px;
     color: #1e3a8a;
+    text-align: center;
 }
 
 p {
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: #666;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 #search {
     width: 100%;
-    padding: 14px;
-    font-size: 1em;
+    padding: 15px;
+    font-size: 1.1em;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     margin-bottom: 40px;
@@ -44,21 +46,32 @@ p {
     outline: none;
 }
 
+.recent-symbols {
+    margin-bottom: 40px;
+}
+
+.recent-symbols h3 {
+    font-size: 1.5em;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .tabs {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 15px;
     justify-content: center;
     margin-bottom: 40px;
 }
 
 .tab {
-    padding: 10px 25px;
-    font-size: 1em;
+    padding: 12px 25px;
+    font-size: 1.1em;
     border: none;
     background-color: #e5e7eb;
     color: #4b5563;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -89,34 +102,27 @@ p {
     font-size: 24px;
     width: 60px;
     height: 60px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
     cursor: pointer;
     transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .symbol:hover {
     background-color: #f3f4f6;
     border-color: #3b82f6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .symbol.copied {
     background-color: #34d399;
     color: #fff;
     border-color: #34d399;
+    box-shadow: 0 4px 8px rgba(52, 211, 153, 0.3);
 }
 
 .hidden {
     display: none;
-}
-
-.recent-symbols {
-    margin-top: 40px;
-}
-
-.recent-symbols h3 {
-    font-size: 1.3em;
-    color: #1e3a8a;
-    margin-bottom: 15px;
 }
