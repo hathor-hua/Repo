@@ -1,2 +1,2 @@
 # converter
-智識簡繁轉換
+DeepSeek簡繁轉換
