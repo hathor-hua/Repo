@@ -1,108 +1,111 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簡繁轉換工具</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>簡繁轉換工具</title>
+  
+  <!-- Step 1: 先載入 opencc-js UMD 版本 -->
+  <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/opencc.js"></script>
 
-    <!-- 載入 OpenCC 庫 -->
-    <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/opencc.js"></script>
-
-    <style>
-        /* 基礎樣式 */
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .container {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        textarea {
-            width: 100%;
-            height: 150px;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+  <style>
+    /* 基礎樣式 */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .container {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>簡繁轉換工具</h1>
-        <textarea id="inputText" placeholder="輸入要轉換的文字..."></textarea>
-        <div>
-            <button onclick="convertToSimplified()">轉換為簡體</button>
-            <button onclick="convertToTraditional()">轉換為繁體</button>
-            <button onclick="copyResult()">複製結果</button>
-        </div>
-        <textarea id="outputText" readonly placeholder="轉換結果..."></textarea>
+  <div class="container">
+    <h1>簡繁轉換工具</h1>
+    <textarea id="inputText" placeholder="輸入要轉換的文字..."></textarea>
+    <div>
+      <button onclick="convertToSimplified()">轉換為簡體</button>
+      <button onclick="convertToTraditional()">轉換為繁體</button>
+      <button onclick="copyResult()">複製結果</button>
     </div>
+    <textarea id="outputText" readonly placeholder="轉換結果..."></textarea>
+  </div>
 
-    <script>
-        // 直接初始化轉換器
-        let converterTraditionalToSimplified;
-        let converterSimplifiedToTraditional;
+  <!-- Step 2: 在載入 opencc-js 後，再寫我們的程式碼 -->
+  <script>
+    // 先宣告變數
+    let converterTraditionalToSimplified;
+    let converterSimplifiedToTraditional;
 
-        function initConverters() {
-            try {
-                converterTraditionalToSimplified = new OpenCC.Converter('t2s'); // 繁轉簡
-                converterSimplifiedToTraditional = new OpenCC.Converter('s2t'); // 簡轉繁
-                console.log("轉換器載入成功");
-            } catch (error) {
-                console.error("轉換器載入失敗", error);
-            }
-        }
+    function initConverters() {
+      // 檢查 OpenCC 是否被載入（此時若還是 undefined，就代表腳本載入失敗或路徑有問題）
+      if (typeof OpenCC === 'undefined') {
+        console.error("OpenCC 未定義，可能 CDN 失效或被阻擋了。");
+        return;
+      }
+      // 正確初始化 - 使用 "new OpenCC.Converter('t2s')" 與 "new OpenCC.Converter('s2t')"
+      converterTraditionalToSimplified = new OpenCC.Converter('t2s'); // 繁 -> 簡
+      converterSimplifiedToTraditional = new OpenCC.Converter('s2t'); // 簡 -> 繁
+      console.log("轉換器載入成功！");
+    }
 
-        // 確保 OpenCC 載入後才初始化轉換器
-        document.addEventListener("DOMContentLoaded", initConverters);
+    // DOM 載入完成後才初始化
+    document.addEventListener("DOMContentLoaded", initConverters);
 
-        // 轉換為簡體
-        function convertToSimplified() {
-            if (!converterTraditionalToSimplified) {
-                alert("轉換器尚未載入，請稍候...");
-                return;
-            }
-            const input = document.getElementById('inputText').value;
-            const output = converterTraditionalToSimplified.convert(input);
-            document.getElementById('outputText').value = output;
-        }
+    // 轉換為簡體
+    function convertToSimplified() {
+      if (!converterTraditionalToSimplified) {
+        alert("轉換器尚未載入，請稍候...");
+        return;
+      }
+      const input = document.getElementById('inputText').value;
+      const output = converterTraditionalToSimplified.convert(input);
+      document.getElementById('outputText').value = output;
+    }
 
-        // 轉換為繁體
-        function convertToTraditional() {
-            if (!converterSimplifiedToTraditional) {
-                alert("轉換器尚未載入，請稍候...");
-                return;
-            }
-            const input = document.getElementById('inputText').value;
-            const output = converterSimplifiedToTraditional.convert(input);
-            document.getElementById('outputText').value = output;
-        }
+    // 轉換為繁體
+    function convertToTraditional() {
+      if (!converterSimplifiedToTraditional) {
+        alert("轉換器尚未載入，請稍候...");
+        return;
+      }
+      const input = document.getElementById('inputText').value;
+      const output = converterSimplifiedToTraditional.convert(input);
+      document.getElementById('outputText').value = output;
+    }
 
-        // 複製結果
-        function copyResult() {
-            const output = document.getElementById('outputText');
-            output.select();
-            navigator.clipboard.writeText(output.value);
-            alert('已複製結果！');
-        }
-    </script>
+    // 複製結果
+    function copyResult() {
+      const output = document.getElementById('outputText');
+      output.select();
+      navigator.clipboard.writeText(output.value).then(
+        () => alert('已複製結果！')
+      );
+    }
+  </script>
 </body>
 </html>
