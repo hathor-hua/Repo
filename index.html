@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>特殊符號選取工具</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>特殊符號選取工具</h1>
-        <p>點擊符號即可複製到剪貼簿</p>
+        <p>點擊符號即可複製到剪貼簿，輕鬆使用！</p>
         
         <!-- 搜尋框 -->
-        <input type="text" id="search" placeholder="輸入關鍵字搜尋符號...">
+        <input type="text" id="search" placeholder="輸入關鍵字搜尋符號（如：笑、心、箭頭）">
         
         <!-- 分類標籤 -->
         <div class="tabs">
@@ -21,22 +22,34 @@
             <button class="tab" data-tab="math">數學符號</button>
             <button class="tab" data-tab="currency">貨幣符號</button>
             <button class="tab" data-tab="shapes">圖形符號</button>
+            <button class="tab" data-tab="stars">星形符號</button>
+            <button class="tab" data-tab="flowers">花卉符號</button>
+            <button class="tab" data-tab="brackets">括號符號</button>
+            <button class="tab" data-tab="zodiac">十二星座</button>
         </div>
         
         <!-- 符號展示區 -->
         <div class="symbol-container">
-            <!-- 表情符號 -->
             <div class="symbols" id="emojis">
-                <span class="symbol" data-symbol="😊">😊</span>
+                <span class="symbol" data-symbol="😀">😀</span>
                 <span class="symbol" data-symbol="😂">😂</span>
+                <span class="symbol" data-symbol="😍">😍</span>
+                <span class="symbol" data-symbol="🥳">🥳</span>
+                <span class="symbol" data-symbol="😢">😢</span>
+                <span class="symbol" data-symbol="😡">😡</span>
+                <span class="symbol" data-symbol="👍">👍</span>
+                <span class="symbol" data-symbol="👏">👏</span>
                 <span class="symbol" data-symbol="❤️">❤️</span>
                 <span class="symbol" data-symbol="✨">✨</span>
                 <span class="symbol" data-symbol="🌟">🌟</span>
+                <span class="symbol" data-symbol="🎉">🎉</span>
                 <span class="symbol" data-symbol="🍀">🍀</span>
                 <span class="symbol" data-symbol="🐾">🐾</span>
-                <span class="symbol" data-symbol="🎉">🎉</span>
+                <span class="symbol" data-symbol="🌈">🌈</span>
+                <span class="symbol" data-symbol="☀️">☀️</span>
+                <span class="symbol" data-symbol="🌙">🌙</span>
+                <span class="symbol" data-symbol="💡">💡</span>
             </div>
-            <!-- 箭頭 -->
             <div class="symbols hidden" id="arrows">
                 <span class="symbol" data-symbol="➡️">➡️</span>
                 <span class="symbol" data-symbol="⬅️">⬅️</span>
@@ -46,8 +59,15 @@
                 <span class="symbol" data-symbol="↙️">↙️</span>
                 <span class="symbol" data-symbol="➤">➤</span>
                 <span class="symbol" data-symbol="⇧">⇧</span>
+                <span class="symbol" data-symbol="⇩">⇩</span>
+                <span class="symbol" data-symbol="↔️">↔️</span>
+                <span class="symbol" data-symbol="↕️">↕️</span>
+                <span class="symbol" data-symbol="➜">➜</span>
+                <span class="symbol" data-symbol="←">←</span>
+                <span class="symbol" data-symbol="→">→</span>
+                <span class="symbol" data-symbol="↑">↑</span>
+                <span class="symbol" data-symbol="↓">↓</span>
             </div>
-            <!-- 數學符號 -->
             <div class="symbols hidden" id="math">
                 <span class="symbol" data-symbol="∞">∞</span>
                 <span class="symbol" data-symbol="∑">∑</span>
@@ -57,8 +77,13 @@
                 <span class="symbol" data-symbol="±">±</span>
                 <span class="symbol" data-symbol="×">×</span>
                 <span class="symbol" data-symbol="÷">÷</span>
+                <span class="symbol" data-symbol="≈">≈</span>
+                <span class="symbol" data-symbol="≠">≠</span>
+                <span class="symbol" data-symbol="≤">≤</span>
+                <span class="symbol" data-symbol="≥">≥</span>
+                <span class="symbol" data-symbol="≡">≡</span>
+                <span class="symbol" data-symbol="∝">∝</span>
             </div>
-            <!-- 貨幣符號 -->
             <div class="symbols hidden" id="currency">
                 <span class="symbol" data-symbol="$">$</span>
                 <span class="symbol" data-symbol="€">€</span>
@@ -68,8 +93,12 @@
                 <span class="symbol" data-symbol="₹">₹</span>
                 <span class="symbol" data-symbol="₽">₽</span>
                 <span class="symbol" data-symbol="฿">฿</span>
+                <span class="symbol" data-symbol="¢">¢</span>
+                <span class="symbol" data-symbol="₪">₪</span>
+                <span class="symbol" data-symbol="₫">₫</span>
+                <span class="symbol" data-symbol="₣">₣</span>
+                <span class="symbol" data-symbol="₧">₧</span>
             </div>
-            <!-- 圖形符號 -->
             <div class="symbols hidden" id="shapes">
                 <span class="symbol" data-symbol="★">★</span>
                 <span class="symbol" data-symbol="✦">✦</span>
@@ -79,7 +108,82 @@
                 <span class="symbol" data-symbol="▼">▼</span>
                 <span class="symbol" data-symbol="●">●</span>
                 <span class="symbol" data-symbol="○">○</span>
+                <span class="symbol" data-symbol="■">■</span>
+                <span class="symbol" data-symbol="□">□</span>
+                <span class="symbol" data-symbol="♣">♣</span>
+                <span class="symbol" data-symbol="♠">♠</span>
+                <span class="symbol" data-symbol="♥">♥</span>
+                <span class="symbol" data-symbol="♦">♦</span>
+                <span class="symbol" data-symbol="△">△</span>
             </div>
+            <div class="symbols hidden" id="stars">
+                <span class="symbol" data-symbol="★">★</span>
+                <span class="symbol" data-symbol="☆">☆</span>
+                <span class="symbol" data-symbol="✡">✡</span>
+                <span class="symbol" data-symbol="✦">✦</span>
+                <span class="symbol" data-symbol="✧">✧</span>
+                <span class="symbol" data-symbol="✩">✩</span>
+                <span class="symbol" data-symbol="✪">✪</span>
+                <span class="symbol" data-symbol="✫">✫</span>
+                <span class="symbol" data-symbol="✬">✬</span>
+                <span class="symbol" data-symbol="✭">✭</span>
+                <span class="symbol" data-symbol="✮">✮</span>
+                <span class="symbol" data-symbol="✯">✯</span>
+                <span class="symbol" data-symbol="✰">✰</span>
+                <span class="symbol" data-symbol="🌟">🌟</span>
+            </div>
+            <div class="symbols hidden" id="flowers">
+                <span class="symbol" data-symbol="✿">✿</span>
+                <span class="symbol" data-symbol="❀">❀</span>
+                <span class="symbol" data-symbol="❁">❁</span>
+                <span class="symbol" data-symbol="❃">❃</span>
+                <span class="symbol" data-symbol="❇">❇</span>
+                <span class="symbol" data-symbol="❈">❈</span>
+                <span class="symbol" data-symbol="❉">❉</span>
+                <span class="symbol" data-symbol="❊">❊</span>
+                <span class="symbol" data-symbol="⚘">⚘</span>
+                <span class="symbol" data-symbol="🌸">🌸</span>
+                <span class="symbol" data-symbol="🌹">🌹</span>
+                <span class="symbol" data-symbol="🌺">🌺</span>
+                <span class="symbol" data-symbol="🌻">🌻</span>
+                <span class="symbol" data-symbol="🌼">🌼</span>
+            </div>
+            <div class="symbols hidden" id="brackets">
+                <span class="symbol" data-symbol="(">(</span>
+                <span class="symbol" data-symbol=")">)</span>
+                <span class="symbol" data-symbol="[">[ </span>
+                <span class="symbol" data-symbol="]">] </span>
+                <span class="symbol" data-symbol="{">{</span>
+                <span class="symbol" data-symbol="}">}</span>
+                <span class="symbol" data-symbol="〈">〈</span>
+                <span class="symbol" data-symbol="〉">〉</span>
+                <span class="symbol" data-symbol="《">《</span>
+                <span class="symbol" data-symbol="》">》</span>
+                <span class="symbol" data-symbol="「">「</span>
+                <span class="symbol" data-symbol="」">」</span>
+                <span class="symbol" data-symbol="【">【</span>
+                <span class="symbol" data-symbol="】">】</span>
+            </div>
+            <div class="symbols hidden" id="zodiac">
+                <span class="symbol" data-symbol="♈">♈</span>
+                <span class="symbol" data-symbol="♉">♉</span>
+                <span class="symbol" data-symbol="♊">♊</span>
+                <span class="symbol" data-symbol="♋">♋</span>
+                <span class="symbol" data-symbol="♌">♌</span>
+                <span class="symbol" data-symbol="♍">♍</span>
+                <span class="symbol" data-symbol="♎">♎</span>
+                <span class="symbol" data-symbol="♏">♏</span>
+                <span class="symbol" data-symbol="♐">♐</span>
+                <span class="symbol" data-symbol="♑">♑</span>
+                <span class="symbol" data-symbol="♒">♒</span>
+                <span class="symbol" data-symbol="♓">♓</span>
+            </div>
+        </div>
+
+        <!-- 最近使用 -->
+        <div class="recent-symbols">
+            <h3>最近使用</h3>
+            <div class="symbols" id="recent"></div>
         </div>
     </div>
     <script src="script.js"></script>
