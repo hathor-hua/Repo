@@ -1,128 +1,64 @@
-body {
-    font-family: 'Noto Sans TC', Arial, sans-serif;
-    background-color: #f4f7fa;
-    color: #333;
-    margin: 0;
-    padding: 40px;
+// 複製功能與最近使用紀錄
+const recentSymbols = new Set();
+const recentContainer = document.getElementById('recent');
+
+function addCopyEvent(symbol) {
+    symbol.addEventListener('click', () => {
+        const text = symbol.getAttribute('data-symbol');
+        navigator.clipboard.writeText(text).then(() => {
+            symbol.classList.add('copied');
+            const originalText = symbol.textContent;
+            symbol.textContent = '已複製';
+            setTimeout(() => {
+                symbol.classList.remove('copied');
+                symbol.textContent = originalText;
+            }, 1000);
+
+            // 添加到最近使用
+            recentSymbols.add(text);
+            updateRecentSymbols();
+        });
+    });
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+document.querySelectorAll('.symbol').forEach(addCopyEvent);
+
+function updateRecentSymbols() {
+    recentContainer.innerHTML = '';
+    recentSymbols.forEach(symbol => {
+        const span = document.createElement('span');
+        span.className = 'symbol';
+        span.setAttribute('data-symbol', symbol);
+        span.textContent = symbol;
+        addCopyEvent(span);
+        recentContainer.appendChild(span);
+    });
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    color: #1e3a8a;
-    text-align: center;
-}
+// 標籤切換
+const tabs = document.querySelectorAll('.tab');
+const symbolSections = document.querySelectorAll('.symbol-container .symbols');
 
-p {
-    font-size: 1.2em;
-    color: #666;
-    margin-bottom: 30px;
-    text-align: center;
-}
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
 
-#search {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1em;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 40px;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
+        const tabId = tab.getAttribute('data-tab');
+        symbolSections.forEach(section => {
+            section.classList.add('hidden');
+            if (section.id === tabId) {
+                section.classList.remove('hidden');
+            }
+        });
+    });
+});
 
-#search:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
-    outline: none;
-}
-
-.recent-symbols {
-    margin-bottom: 40px;
-}
-
-.recent-symbols h3 {
-    font-size: 1.5em;
-    color: #1e3a8a;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-
-.tab {
-    padding: 12px 25px;
-    font-size: 1.1em;
-    border: none;
-    background-color: #e5e7eb;
-    color: #4b5563;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.tab:hover {
-    background-color: #d1d5db;
-}
-
-.tab.active {
-    background-color: #3b82f6;
-    color: #fff;
-}
-
-.symbol-container {
-    margin-bottom: 40px;
-}
-
-.symbols {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    gap: 15px;
-}
-
-.symbol {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    width: 60px;
-    height: 60px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.symbol:hover {
-    background-color: #f3f4f6;
-    border-color: #3b82f6;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.symbol.copied {
-    background-color: #34d399;
-    color: #fff;
-    border-color: #34d399;
-    box-shadow: 0 4px 8px rgba(52, 211, 153, 0.3);
-}
-
-.hidden {
-    display: none;
-}
+// 搜尋功能
+document.getElementById('search').addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    document.querySelectorAll('.symbol-container .symbol').forEach(symbol => {
+        const text = symbol.getAttribute('data-symbol').toLowerCase();
+        symbol.style.display = text.includes(query) ? 'flex' : 'none';
+    });
+});
