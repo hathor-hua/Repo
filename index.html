@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>簡繁轉換工具</title>
-  
-  <!-- Step 1: 先載入 opencc-js UMD 版本 -->
-  <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/opencc.js"></script>
+
+  <!-- 改用 unpkg 以避免某些網路阻擋 jsDelivr -->
+  <script src="https://unpkg.com/opencc-js@1.1.0/dist/umd/opencc.js"></script>
 
   <style>
     /* 基礎樣式 */
@@ -55,25 +55,25 @@
     <textarea id="outputText" readonly placeholder="轉換結果..."></textarea>
   </div>
 
-  <!-- Step 2: 在載入 opencc-js 後，再寫我們的程式碼 -->
   <script>
     // 先宣告變數
     let converterTraditionalToSimplified;
     let converterSimplifiedToTraditional;
 
+    // 初始化轉換器
     function initConverters() {
-      // 檢查 OpenCC 是否被載入（此時若還是 undefined，就代表腳本載入失敗或路徑有問題）
+      // 檢查 OpenCC 是否被成功載入
       if (typeof OpenCC === 'undefined') {
         console.error("OpenCC 未定義，可能 CDN 失效或被阻擋了。");
         return;
       }
-      // 正確初始化 - 使用 "new OpenCC.Converter('t2s')" 與 "new OpenCC.Converter('s2t')"
-      converterTraditionalToSimplified = new OpenCC.Converter('t2s'); // 繁 -> 簡
-      converterSimplifiedToTraditional = new OpenCC.Converter('s2t'); // 簡 -> 繁
+      // 初始化 - 使用 "new OpenCC.Converter('t2s')" 與 "new OpenCC.Converter('s2t')"
+      converterTraditionalToSimplified = new OpenCC.Converter('t2s'); // 繁體 -> 簡體
+      converterSimplifiedToTraditional = new OpenCC.Converter('s2t'); // 簡體 -> 繁體
       console.log("轉換器載入成功！");
     }
 
-    // DOM 載入完成後才初始化
+    // DOM 載入完成後再初始化
     document.addEventListener("DOMContentLoaded", initConverters);
 
     // 轉換為簡體
