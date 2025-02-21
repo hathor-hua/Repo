@@ -1,111 +1,522 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>簡繁轉換工具</title>
-
-  <!-- 改用 unpkg 以避免某些網路阻擋 jsDelivr -->
-  <script src="https://unpkg.com/opencc-js@1.1.0/dist/umd/opencc.js"></script>
-
-  <style>
-    /* 基礎樣式 */
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-    }
-    .container {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin: 5px;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-  </style>
+  <meta charset="utf-8">
+  <title>特殊符號收藏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入自訂的 CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>簡繁轉換工具</h1>
-    <textarea id="inputText" placeholder="輸入要轉換的文字..."></textarea>
-    <div>
-      <button onclick="convertToSimplified()">轉換為簡體</button>
-      <button onclick="convertToTraditional()">轉換為繁體</button>
-      <button onclick="copyResult()">複製結果</button>
+
+  <!-- 頁首 -->
+  <header>
+    <h1>特殊符號收藏</h1>
+    <p>以下分類匯集了許多常見的特殊符號，點擊「複製」按鈕即可快速取得！</p>
+    <nav>
+      <a href="#arrows">箭頭符號</a> |
+      <a href="#stars">星號與幾何</a> |
+      <a href="#hearts">心形與撲克牌花色</a> |
+      <a href="#currency">貨幣符號</a> |
+      <a href="#math">數學符號</a> |
+      <a href="#checks">勾叉符號</a>
+    </nav>
+  </header>
+
+  <hr>
+
+  <!-- 1. 箭頭符號區 -->
+  <section id="arrows">
+    <h2>箭頭符號</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">→</span>
+      <div class="info">
+        <p>Unicode: U+2192</p>
+        <p>向右箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="→">複製</button>
     </div>
-    <textarea id="outputText" readonly placeholder="轉換結果..."></textarea>
-  </div>
 
-  <script>
-    // 先宣告變數
-    let converterTraditionalToSimplified;
-    let converterSimplifiedToTraditional;
+    <div class="symbol-card">
+      <span class="symbol">←</span>
+      <div class="info">
+        <p>Unicode: U+2190</p>
+        <p>向左箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="←">複製</button>
+    </div>
 
-    // 初始化轉換器
-    function initConverters() {
-      // 檢查 OpenCC 是否被成功載入
-      if (typeof OpenCC === 'undefined') {
-        console.error("OpenCC 未定義，可能 CDN 失效或被阻擋了。");
-        return;
-      }
-      // 初始化 - 使用 "new OpenCC.Converter('t2s')" 與 "new OpenCC.Converter('s2t')"
-      converterTraditionalToSimplified = new OpenCC.Converter('t2s'); // 繁體 -> 簡體
-      converterSimplifiedToTraditional = new OpenCC.Converter('s2t'); // 簡體 -> 繁體
-      console.log("轉換器載入成功！");
-    }
+    <div class="symbol-card">
+      <span class="symbol">↑</span>
+      <div class="info">
+        <p>Unicode: U+2191</p>
+        <p>向上箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↑">複製</button>
+    </div>
 
-    // DOM 載入完成後再初始化
-    document.addEventListener("DOMContentLoaded", initConverters);
+    <div class="symbol-card">
+      <span class="symbol">↓</span>
+      <div class="info">
+        <p>Unicode: U+2193</p>
+        <p>向下箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↓">複製</button>
+    </div>
 
-    // 轉換為簡體
-    function convertToSimplified() {
-      if (!converterTraditionalToSimplified) {
-        alert("轉換器尚未載入，請稍候...");
-        return;
-      }
-      const input = document.getElementById('inputText').value;
-      const output = converterTraditionalToSimplified.convert(input);
-      document.getElementById('outputText').value = output;
-    }
+    <div class="symbol-card">
+      <span class="symbol">↔</span>
+      <div class="info">
+        <p>Unicode: U+2194</p>
+        <p>左右雙向箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↔">複製</button>
+    </div>
 
-    // 轉換為繁體
-    function convertToTraditional() {
-      if (!converterSimplifiedToTraditional) {
-        alert("轉換器尚未載入，請稍候...");
-        return;
-      }
-      const input = document.getElementById('inputText').value;
-      const output = converterSimplifiedToTraditional.convert(input);
-      document.getElementById('outputText').value = output;
-    }
+    <div class="symbol-card">
+      <span class="symbol">↕</span>
+      <div class="info">
+        <p>Unicode: U+2195</p>
+        <p>上下雙向箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↕">複製</button>
+    </div>
 
-    // 複製結果
-    function copyResult() {
-      const output = document.getElementById('outputText');
-      output.select();
-      navigator.clipboard.writeText(output.value).then(
-        () => alert('已複製結果！')
-      );
-    }
-  </script>
+    <div class="symbol-card">
+      <span class="symbol">⇒</span>
+      <div class="info">
+        <p>Unicode: U+21D2</p>
+        <p>向右雙箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="⇒">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">⇐</span>
+      <div class="info">
+        <p>Unicode: U+21D0</p>
+        <p>向左雙箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="⇐">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">↵</span>
+      <div class="info">
+        <p>Unicode: U+21B5</p>
+        <p>換行箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↵">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">↪</span>
+      <div class="info">
+        <p>Unicode: U+21AA</p>
+        <p>右彎箭頭</p>
+      </div>
+      <button class="copy-btn" data-symbol="↪">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 2. 星號與幾何符號 -->
+  <section id="stars">
+    <h2>星號與幾何符號</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">★</span>
+      <div class="info">
+        <p>Unicode: U+2605</p>
+        <p>實心星號</p>
+      </div>
+      <button class="copy-btn" data-symbol="★">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">☆</span>
+      <div class="info">
+        <p>Unicode: U+2606</p>
+        <p>空心星號</p>
+      </div>
+      <button class="copy-btn" data-symbol="☆">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✪</span>
+      <div class="info">
+        <p>Unicode: U+272A</p>
+        <p>圓星</p>
+      </div>
+      <button class="copy-btn" data-symbol="✪">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✦</span>
+      <div class="info">
+        <p>Unicode: U+2726</p>
+        <p>黑色四角星</p>
+      </div>
+      <button class="copy-btn" data-symbol="✦">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✧</span>
+      <div class="info">
+        <p>Unicode: U+2727</p>
+        <p>白色四角星</p>
+      </div>
+      <button class="copy-btn" data-symbol="✧">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">○</span>
+      <div class="info">
+        <p>Unicode: U+25CB</p>
+        <p>白色圓形</p>
+      </div>
+      <button class="copy-btn" data-symbol="○">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">●</span>
+      <div class="info">
+        <p>Unicode: U+25CF</p>
+        <p>黑色圓形</p>
+      </div>
+      <button class="copy-btn" data-symbol="●">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">■</span>
+      <div class="info">
+        <p>Unicode: U+25A0</p>
+        <p>黑色方形</p>
+      </div>
+      <button class="copy-btn" data-symbol="■">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 3. 心形與撲克牌花色 -->
+  <section id="hearts">
+    <h2>心形與撲克牌花色</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">♥</span>
+      <div class="info">
+        <p>Unicode: U+2665</p>
+        <p>實心愛心</p>
+      </div>
+      <button class="copy-btn" data-symbol="♥">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♡</span>
+      <div class="info">
+        <p>Unicode: U+2661</p>
+        <p>空心愛心</p>
+      </div>
+      <button class="copy-btn" data-symbol="♡">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♦</span>
+      <div class="info">
+        <p>Unicode: U+2666</p>
+        <p>鑽石 (實心)</p>
+      </div>
+      <button class="copy-btn" data-symbol="♦">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♢</span>
+      <div class="info">
+        <p>Unicode: U+2662</p>
+        <p>鑽石 (空心)</p>
+      </div>
+      <button class="copy-btn" data-symbol="♢">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♣</span>
+      <div class="info">
+        <p>Unicode: U+2663</p>
+        <p>梅花</p>
+      </div>
+      <button class="copy-btn" data-symbol="♣">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♠</span>
+      <div class="info">
+        <p>Unicode: U+2660</p>
+        <p>黑桃 (實心)</p>
+      </div>
+      <button class="copy-btn" data-symbol="♠">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">♤</span>
+      <div class="info">
+        <p>Unicode: U+2664</p>
+        <p>黑桃 (空心)</p>
+      </div>
+      <button class="copy-btn" data-symbol="♤">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">☺</span>
+      <div class="info">
+        <p>Unicode: U+263A</p>
+        <p>微笑臉</p>
+      </div>
+      <button class="copy-btn" data-symbol="☺">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 4. 貨幣符號 -->
+  <section id="currency">
+    <h2>貨幣符號</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">$</span>
+      <div class="info">
+        <p>Unicode: U+0024</p>
+        <p>美元符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="$">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">€</span>
+      <div class="info">
+        <p>Unicode: U+20AC</p>
+        <p>歐元符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="€">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">¥</span>
+      <div class="info">
+        <p>Unicode: U+00A5</p>
+        <p>日圓 / 人民幣符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="¥">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">£</span>
+      <div class="info">
+        <p>Unicode: U+00A3</p>
+        <p>英鎊符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="£">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">₩</span>
+      <div class="info">
+        <p>Unicode: U+20A9</p>
+        <p>韓圓符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="₩">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">₹</span>
+      <div class="info">
+        <p>Unicode: U+20B9</p>
+        <p>印度盧比</p>
+      </div>
+      <button class="copy-btn" data-symbol="₹">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">₿</span>
+      <div class="info">
+        <p>Unicode: U+20BF</p>
+        <p>比特幣符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="₿">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 5. 數學符號 -->
+  <section id="math">
+    <h2>數學符號</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">±</span>
+      <div class="info">
+        <p>Unicode: U+00B1</p>
+        <p>正負號</p>
+      </div>
+      <button class="copy-btn" data-symbol="±">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">×</span>
+      <div class="info">
+        <p>Unicode: U+00D7</p>
+        <p>乘號</p>
+      </div>
+      <button class="copy-btn" data-symbol="×">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">÷</span>
+      <div class="info">
+        <p>Unicode: U+00F7</p>
+        <p>除號</p>
+      </div>
+      <button class="copy-btn" data-symbol="÷">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">√</span>
+      <div class="info">
+        <p>Unicode: U+221A</p>
+        <p>開根號</p>
+      </div>
+      <button class="copy-btn" data-symbol="√">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">∑</span>
+      <div class="info">
+        <p>Unicode: U+2211</p>
+        <p>總和 (Sigma)</p>
+      </div>
+      <button class="copy-btn" data-symbol="∑">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">π</span>
+      <div class="info">
+        <p>Unicode: U+03C0</p>
+        <p>圓周率 (Pi)</p>
+      </div>
+      <button class="copy-btn" data-symbol="π">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">∞</span>
+      <div class="info">
+        <p>Unicode: U+221E</p>
+        <p>無限大</p>
+      </div>
+      <button class="copy-btn" data-symbol="∞">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">≠</span>
+      <div class="info">
+        <p>Unicode: U+2260</p>
+        <p>不等於</p>
+      </div>
+      <button class="copy-btn" data-symbol="≠">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 6. 勾叉符號 -->
+  <section id="checks">
+    <h2>勾叉符號</h2>
+
+    <div class="symbol-card">
+      <span class="symbol">✔</span>
+      <div class="info">
+        <p>Unicode: U+2714</p>
+        <p>勾 (Heavy Check Mark)</p>
+      </div>
+      <button class="copy-btn" data-symbol="✔">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✘</span>
+      <div class="info">
+        <p>Unicode: U+2718</p>
+        <p>叉 (Heavy Ballot X)</p>
+      </div>
+      <button class="copy-btn" data-symbol="✘">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✓</span>
+      <div class="info">
+        <p>Unicode: U+2713</p>
+        <p>勾 (Check Mark)</p>
+      </div>
+      <button class="copy-btn" data-symbol="✓">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✗</span>
+      <div class="info">
+        <p>Unicode: U+2717</p>
+        <p>叉 (Ballot X)</p>
+      </div>
+      <button class="copy-btn" data-symbol="✗">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">☑</span>
+      <div class="info">
+        <p>Unicode: U+2611</p>
+        <p>打勾方塊</p>
+      </div>
+      <button class="copy-btn" data-symbol="☑">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">☐</span>
+      <div class="info">
+        <p>Unicode: U+2610</p>
+        <p>空方塊</p>
+      </div>
+      <button class="copy-btn" data-symbol="☐">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">☒</span>
+      <div class="info">
+        <p>Unicode: U+2612</p>
+        <p>叉方塊</p>
+      </div>
+      <button class="copy-btn" data-symbol="☒">複製</button>
+    </div>
+
+    <div class="symbol-card">
+      <span class="symbol">✕</span>
+      <div class="info">
+        <p>Unicode: U+2715</p>
+        <p>X 符號</p>
+      </div>
+      <button class="copy-btn" data-symbol="✕">複製</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 頁尾 -->
+  <footer>
+    <p>© 2025 特殊符號收藏. All Rights Reserved.</p>
+    <p><a href="https://github.com/YourGitHubUser/YourRepo" target="_blank">
+      在 GitHub 上檢視此專案
+    </a></p>
+  </footer>
+
+  <!-- 引入自訂的 JS -->
+  <script src="js/main.js"></script>
 </body>
 </html>
